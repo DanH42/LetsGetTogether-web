@@ -1,13 +1,4 @@
-<!doctype html> <html class="no-js"> <head> <meta charset="utf-8"> <title></title> <meta name="description" content=""> <meta name="viewport" content="width=device-width"> <!-- Place favicon.ico and apple-touch-icon.png in the root directory --> <link rel="stylesheet" href="styles/main.74a16c27.css"> <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOGmXszIAX9TWMa3EVzy28VjNfdltKAOY"></script> <script type="text/javascript">// function initialize() {
-      //   var mapOptions = {
-      //     center: { lat: -34.397, lng: 150.644},
-      //     zoom: 8
-      //   };
-      //   var map = new google.maps.Map(document.getElementById('map-canvas'),
-      //       mapOptions);
-      // }
-      // google.maps.event.addDomListener(window, 'load', initialize);
-      var user_latitude = null, user_longitude = null;
+<!doctype html> <html class="no-js"> <head> <meta charset="utf-8"> <title></title> <meta name="description" content=""> <meta name="viewport" content="width=device-width"> <!-- Place favicon.ico and apple-touch-icon.png in the root directory --> <link rel="stylesheet" href="styles/main.74a16c27.css"> <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOGmXszIAX9TWMa3EVzy28VjNfdltKAOY"></script> <script type="text/javascript">var user_latitude = null, user_longitude = null;
       navigator.geolocation.getCurrentPosition(show_map);
       function show_map(position) 
       {
@@ -28,7 +19,6 @@
           name: 'Minja Gaso',
           src: 'images/gaso.PNG',
           id: 100006732908567,
-          // url: '#/detail/' + this.id,
           gender: 'male'
         };
         person1.url = '#/detail/' + person1.id;
@@ -43,7 +33,6 @@
           name: 'Filip Gaso',
           src: 'images/gaso2.PNG',
           id: 568917034,
-          //url: '#/detail/' + person2.id,
           gender: 'male'
         };
         person2.url = '#/detail/' + person2.id;
@@ -74,22 +63,20 @@
             person_element.id = 'person-' + person.id;
             person_element.onclick = function()
             {
-              //window.location = 'http://www.facebook.com/' + person.id;
               window.location = person.url;
             }
-        //
         var person_heading = document.createElement('h5');
             person_heading.innerHTML = person.name;
-        //
+
         var person_image = document.createElement('img');
             person_image.src = person.src;
-        //
+
         var person_gender = document.createElement('p');
         var person_gender_label = document.createElement('strong');
             person_gender_label.innerHTML = "Gender";
             person_gender.appendChild(person_gender_label);
             person_gender.innerHTML = person.gender;
-        //
+
         person_element.appendChild(person_heading);
         person_element.appendChild(person_image);
         person_element.appendChild(person_gender);
