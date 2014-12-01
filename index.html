@@ -2,97 +2,19 @@
       navigator.geolocation.getCurrentPosition(show_map);
       function show_map(position) 
       {
+        localStorage.setItem('geoLatitude', position.coords.latitude);
+        localStorage.setItem('geoLongitude', position.coords.longitude);
         user_latitude = position.coords.latitude;
         user_longitude = position.coords.longitude;
-        initialize();
-      }
-      function initialize()
-      {
+        
         var mapOptions = {
           center: { lat: user_latitude, lng: user_longitude},
           zoom: 12
         };
 
         var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
-        var person1 = {
-          name: 'Minja Gaso',
-          src: 'images/gaso.PNG',
-          id: 100006732908567,
-          gender: 'male'
-        };
-        person1.url = '#/detail/' + person1.id;
-
-        var person1Marker = new google.maps.Marker({
-          position: new google.maps.LatLng(user_latitude, user_longitude),
-          map: map,
-          title:"Minja Gaso"
-        });
-
-        var person2 = {
-          name: 'Filip Gaso',
-          src: 'images/gaso2.PNG',
-          id: 568917034,
-          gender: 'male'
-        };
-        person2.url = '#/detail/' + person2.id;
-
-        var person2Marker = new google.maps.Marker({
-          position: new google.maps.LatLng(40.132190, -88.290294),
-          map: map,
-          title:"Parkland College"
-        });
-
-        var infowindow = new google.maps.InfoWindow({
-          content: ""
-        });
-
-        google.maps.event.addListener(person1Marker, 'click', function() {
-          infowindow.content = generateContent(person1);
-          infowindow.open(map, person1Marker);
-        });
-
-        google.maps.event.addListener(person2Marker, 'click', function() {
-          infowindow.content = generateContent(person2);
-          infowindow.open(map, person2Marker);
-        });
-      }
-      function generateContent(person)
-      {
-        var person_element = document.createElement('div');
-            person_element.id = 'person-' + person.id;
-            person_element.onclick = function()
-            {
-              window.location = person.url;
-            }
-        var person_heading = document.createElement('h5');
-            person_heading.innerHTML = person.name;
-
-        var person_image = document.createElement('img');
-            person_image.src = person.src;
-
-        var person_gender = document.createElement('p');
-        var person_gender_label = document.createElement('strong');
-            person_gender_label.innerHTML = "Gender";
-            person_gender.appendChild(person_gender_label);
-            person_gender.innerHTML = person.gender;
-
-        person_element.appendChild(person_heading);
-        person_element.appendChild(person_image);
-        person_element.appendChild(person_gender);
-
-        return person_element;
       }</script>  <body ng-app="g2gApp"> <div id="map-canvas"></div> <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]--> <!-- Add your site or application content here --> <div class="container"> <div class="header"> <ul class="nav nav-pills pull-right"> <li class="active"><a ng-href="#">Home</a></li> </ul> <h3 class="text-muted">Get2Gether</h3> </div> <!--      <a href="http://localhost:8800/api/auth/facebook">Login with Facebook (TEMP)</a>--> <div ng-view=""></div> <div class="footer"> <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p> </div> </div> <!-- Google Analytics: change UA-XXXXX-X to be your site's ID --> <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');</script> <!--
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOGmXszIAX9TWMa3EVzy28VjNfdltKAOY"></script>
-    <script src="scripts/map.js"></script>
-    --> <!--[if lt IE 9]>
+    <![endif]--> <div class="container"> <div class="header"> <ul class="nav nav-pills pull-right"> <li class="active"><a ng-href="#">Home</a></li> </ul> <h3 class="text-muted">Get2Gether</h3> </div> <div ng-view=""></div> <div class="footer"> <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p> </div> </div> <!--[if lt IE 9]>
     <script src="scripts/oldieshim.d48d8270.js"></script>
-    <![endif]--> <script src="scripts/vendor.4f6855b0.js"></script> <script src="scripts/scripts.d99543ae.js"></script>  
+    <![endif]--> <script src="scripts/vendor.4f6855b0.js"></script> <script src="scripts/scripts.cf33d93e.js"></script>  
