@@ -1,29 +1,48 @@
 <!doctype html> <html class="no-js"> <head> <meta charset="utf-8"> <title></title> <meta name="description" content=""> <meta name="viewport" content="width=device-width"> <!-- Place favicon.ico and apple-touch-icon.png in the root directory --> <link rel="stylesheet" href="styles/main.a79a6ce3.css"> <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOGmXszIAX9TWMa3EVzy28VjNfdltKAOY"></script> <script type="text/javascript">var user_latitude = null, user_longitude = null, map = null;
 
-      var options = {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0
-      };
-      function show_map(position) 
+      function showPosition(position) 
       {
         document.getElementById('container').style.display = 'block';
         localStorage.setItem('userLatitude', position.coords.latitude);
         localStorage.setItem('userLongitude', position.coords.longitude);
         user_latitude = position.coords.latitude;
-        user_longitude = position.coords.longitude;
-        
+        user_longitude = position.coords.longitude;     
+           
         var mapOptions = {
           center: { lat: user_latitude, lng: user_longitude},
           zoom: 12
         };
-
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(user_latitude, user_longitude),
+            map: map,
+            title:"Me!"
+        });
       }
-      function rejected(err) {
-        window.location = 'http://www.google.com/';
+      function showError(error) {
+          switch(error.code) {
+              case error.PERMISSION_DENIED:
+                  alert("User denied the request for Geolocation.");
+                  break;
+              case error.POSITION_UNAVAILABLE:
+                  alert("Location information is unavailable.");
+                  break;
+              case error.TIMEOUT:
+                  alert("The request to get user location timed out.");
+                  break;
+              case error.UNKNOWN_ERROR:
+                  alert("An unknown error occurred.");
+                  break;
+          }
       }
-      navigator.geolocation.getCurrentPosition(show_map, rejected, options);</script>  <body ng-app="g2gApp"> <div id="map-canvas"></div> <!--[if lt IE 7]>
+
+      var options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      };
+      navigator.geolocation.getCurrentPosition(showPosition, showError, options);</script>  <body ng-app="g2gApp"> <div id="map-canvas"></div> <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]--> <div class="container" id="container" style="display:none"> <div class="header"> <ul class="nav nav-pills pull-right"> <li class="active"><a ng-href="#">Home</a></li> </ul> <h3 class="text-muted">Get2Gether</h3> </div> <div ng-view=""></div> <div class="footer"> <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p> </div> </div> <!--[if lt IE 9]>
     <script src="scripts/oldieshim.d48d8270.js"></script>
