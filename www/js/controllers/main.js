@@ -19,17 +19,11 @@ angular.module('g2gMobileApp')
  //            $scope.name = "Timeout called!";
  //        });
  //    }, 2000);
+ //    
 
-	$scope.fbLogin = function(){
-		$q.when(login())
-      	.then(function(results){
-        	$scope.name = results;
-        	alert(results);
-      	});
-	}
+
 
   	$scope.$watch('name', function(){
-  		$scope.$apply();
   		console.log("Name changed: " + $scope.name);
   		$scope.nameLength = $scope.name.length;
   		if($scope.nameLength > 0)
