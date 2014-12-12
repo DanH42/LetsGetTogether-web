@@ -1,0 +1,3 @@
+# view AndroidManifest.xml #generated:6
+-keep class edu.ilstu.it354.CordovaApp { <init>(...); }
+

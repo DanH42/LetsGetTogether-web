@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Hello World</title>
+    </head>
+    <body>
+        <div class="app">
+            <h1>Apache Cordova</h1>
+            <div id="deviceready" class="blink">
+                <p class="event listening">Connecting to Device</p>
+                <p class="event received">Device is Ready</p>
+                <a href="javascript:FacebookInAppBrowser.login();">LOGIN</a>
+            </div>
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>
+
+<button class="btn btn-block" onclick="login()">Login with Facebook</button>
+<hr/>
+<button class="btn btn-block" onclick="getInfo()">Get My Info</button>
+<p>Name: <span id="userName"></span></p>
+<img id="userPic"/>
+<hr/>
+
+
+<p>Complete Facebook Logout. After logging out, you'll have to login again and provide your Facebook credentials.</p>
+<button class="btn btn-block" onclick="logout()">Logout</button>
+<hr/>
+
+        <script type="text/javascript" src="js/index.js"></script>
+<script src="js/openfb.js"></script>
+<script>
+// Defaults to sessionStorage for storing the Facebook token
+openFB.init({appId: '904187232938501'});
+// Uncomment the line below to store the Facebook token in localStorage instead of sessionStorage
+// openFB.init({appId: 'YOUR_FB_APP_ID', tokenStore: window.localStorage});
+function login() 
+{
+    openFB.login(function(response) {
+        if(response.status === 'connected') 
+        {
+            alert('Facebook login succeeded, got access token: ' + response.authResponse.token);
+        }
+        else 
+        {
+            alert('Facebook login failed: ' + response.error);
+        }
+    }, {scope: 'email,read_stream,publish_stream'});
+}
+function getInfo() 
+{
+    openFB.api({
+        path: '/me',
+        success: function(data) {
+        console.log(JSON.stringify(data));
+        document.getElementById("userName").innerHTML = data.name;
+        document.getElementById("userPic").src = 'http://graph.facebook.com/' + data.id + '/picture?type=small';
+        }, error: errorHandler
+    });
+}
+function logout() 
+{
+    openFB.logout(
+        function() {
+        alert('Logout successful');
+    }, errorHandler);
+}
+function errorHandler(error) 
+{
+    alert(error.message);
+}
+</script>
+
+
+
+
+
+
+    </body>
+</html>
