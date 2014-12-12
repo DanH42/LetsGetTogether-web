@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="edu.ilstu.it354" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>GetTogether</name>
+<widget id="edu.ilstu.itk354.g2g" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>g2gMobileApp</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>
